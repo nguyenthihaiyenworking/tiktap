@@ -1,5 +1,5 @@
-import { LetterExperience } from '@/components/letter-experience'
+import { VintageTemplate } from '@/components/templates/vintage'
 
 export default function Page() {
-  return <LetterExperience />
+  return <VintageTemplate />
 }
