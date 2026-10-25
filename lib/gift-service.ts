@@ -5,11 +5,11 @@ const MOCK_GIFTS: Record<string, GiftData> = {
   'demo-vintage': {
     id: 'demo-vintage',
     templateId: 'vintage',
-    recipientName: 'Mẹ yêu dấu',
-    senderName: 'Con trai',
+    recipientName: 'Người thương',
+    senderName: 'Người gửi thư',
     message:
-      'Nhân ngày 20/10, con chúc mẹ luôn bình an, nhiều sức khỏe và ngập tràn niềm vui.\n\nCảm ơn mẹ vì luôn là điểm tựa ấm áp nhất của con trong mọi chặng đường.',
-    photoUrl: '/images/photo.png',
+      'Có những điều khó nói thành lời, nên mình gói vào từng nét mực gửi đến bạn.\n\nCảm ơn vì đã luôn ở đây, cùng đi qua những ngày nắng êm và cả những khoảnh khắc bình dị nhất.',
+    photoUrl: '/images/zootopia.jpg',
     songUrl: '/audio/song.mp3',
   },
   'demo-love': {

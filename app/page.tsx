@@ -1,5 +1,7 @@
 import { VintageTemplate } from '@/components/templates/vintage'
+import { getGiftById } from '@/lib/gift-service'
 
-export default function Page() {
-  return <VintageTemplate />
+export default async function Page() {
+  const demoGift = await getGiftById('demo-vintage')
+  return <VintageTemplate data={demoGift} />
 }

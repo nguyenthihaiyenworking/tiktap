@@ -9,18 +9,14 @@ export const letter: LetterBlock[] = [
   { kind: 'greeting', text: 'Gửi người thương,' },
   {
     kind: 'paragraph',
-    text: 'Đây là chỗ dành cho lá thư của bạn. Mỗi chữ sẽ được gõ ra thật chậm, như thể ai đó đang ngồi bên chiếc máy đánh chữ cũ, thỉnh thoảng dừng lại một chút để nghĩ xem nên viết gì tiếp theo...',
+    text: 'Có những điều khó nói thành lời, nên mình gói vào từng nét mực gửi đến bạn.',
   },
   {
     kind: 'paragraph',
-    text: 'Có những điều khó nói thành lời, nên mình viết ra đây. Cảm ơn vì đã ở đây, vì những buổi chiều nắng nhạt, những tách trà nguội dần, và cả những câu chuyện chẳng đầu chẳng cuối.',
-  },
-  {
-    kind: 'paragraph',
-    text: 'Khi nào bạn gửi nội dung thật, mình sẽ thay đoạn này. Còn bây giờ, cứ nghe nhạc và đọc chậm thôi nhé.',
+    text: 'Cảm ơn vì đã luôn ở đây, cùng đi qua những ngày nắng êm và cả những khoảnh khắc bình dị nhất.',
   },
   { kind: 'closing', text: 'Thương,' },
-  { kind: 'signature', text: 'Người viết thư' },
+  { kind: 'signature', text: 'Người gửi thư' },
 ]
 
 // Swap the song by replacing the file in /public/audio and updating these fields.

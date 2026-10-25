@@ -76,6 +76,19 @@ export function Envelope({
     }
   }, [stage])
 
+  // Tự động cuộn êm xuống để hiển thị trọn vẹn ảnh Polaroid khi viết xong
+  useEffect(() => {
+    if (isFinished && contentRef.current) {
+      const scrollTimer = setTimeout(() => {
+        contentRef.current?.scrollTo({
+          top: contentRef.current.scrollHeight,
+          behavior: 'smooth',
+        })
+      }, 200)
+      return () => clearTimeout(scrollTimer)
+    }
+  }, [isFinished])
+
   // Bắt cử chỉ vuốt trượt ngón tay lên trên (Swipe Up)
   const handleTouchStart = (e: React.TouchEvent) => {
     if (stage !== 'halfway') return
