@@ -42,20 +42,31 @@ export async function getGiftById(id: string): Promise<GiftData | null> {
 
   // 2. Query Supabase khi có biến môi trường
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  const supabaseKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
   if (supabaseUrl && supabaseKey) {
     try {
-      const res = await fetch(
+      const headers = {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+      }
+
+      // 1. Thử query bảng 'gifts'
+      let res = await fetch(
         `${supabaseUrl}/rest/v1/gifts?id=eq.${id}&select=*`,
-        {
-          headers: {
-            apikey: supabaseKey,
-            Authorization: `Bearer ${supabaseKey}`,
-          },
-          next: { revalidate: 60 },
-        } as any
+        { headers, next: { revalidate: 60 } } as any
       )
+
+      // 2. Nếu bảng 'gifts' không tồn tại (404), thử tiếp bảng 'gift_data'
+      if (!res.ok) {
+        res = await fetch(
+          `${supabaseUrl}/rest/v1/gift_data?id=eq.${id}&select=*`,
+          { headers, next: { revalidate: 60 } } as any
+        )
+      }
 
       if (!res.ok) return null
       const rows = await res.json()
