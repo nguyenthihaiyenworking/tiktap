@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useCallback, useMemo, useRef, useState } from 'react'
-import { letter as defaultLetter, song as defaultSong } from '@/lib/letter'
+import { letter as defaultLetter, song as defaultSong, photo as defaultPhoto } from '@/lib/letter'
 import type { GiftData, LetterBlock } from '@/lib/types'
 import { Envelope, type VintageStage } from './envelope'
 import { MusicPlayer } from './music-player'
@@ -51,7 +51,7 @@ export function VintageTemplate({ data }: VintageTemplateProps) {
   }, [data])
 
   const songSrc = data?.songUrl || defaultSong.src
-  const photoSrc = data?.photoUrl || null
+  const photoSrc = data?.photoUrl || defaultPhoto.src
 
   const [stage, setStage] = useState<VintageStage>('closed')
 

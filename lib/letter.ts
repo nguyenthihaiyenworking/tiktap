@@ -25,3 +25,9 @@ export const song = {
   title: 'Gymnopédie No. 1',
   artist: 'Erik Satie',
 }
+
+// Default photo when customer does not provide one
+export const photo = {
+  src: '/images/zootopia.jpg',
+  alt: 'Khoảnh khắc kỷ niệm',
+}
