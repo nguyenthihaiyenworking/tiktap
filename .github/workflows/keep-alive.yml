@@ -1,0 +1,34 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Tự động chạy mỗi 3 ngày một lần vào lúc 00:00 UTC (07:00 sáng giờ VN)
+    - cron: '0 0 */3 * *'
+  # Cho phép bấm nút "Run workflow" bằng tay bất cứ lúc nào trên GitHub để kiểm tra
+  workflow_dispatch:
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Database
+        run: |
+          echo "Bắt đầu gửi request tới Supabase để duy trì hoạt động..."
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+            -H "apikey: sb_publishable_byypcqSdzz9ucrCeiVQv7A_3TsRafgJ" \
+            -H "Authorization: Bearer sb_publishable_byypcqSdzz9ucrCeiVQv7A_3TsRafgJ" \
+            "https://bvmsjopbiixfgqsjdaxl.supabase.co/rest/v1/gifts?select=id&limit=1")
+
+          HTTP_BODY=$(echo "$RESPONSE" | sed '$d')
+          HTTP_STATUS=$(echo "$RESPONSE" | tail -n 1 | cut -d':' -f2)
+
+          echo "Dữ liệu trả về: $HTTP_BODY"
+          echo "Mã trạng thái HTTP: $HTTP_STATUS"
+
+          if [ "$HTTP_STATUS" -eq 200 ]; then
+            echo "THÀNH CÔNG: Supabase đã nhận tín hiệu và phản hồi 200 OK!"
+          else
+            echo "LỖI: Mã trạng thái không hợp lệ: $HTTP_STATUS"
+            exit 1
+          fi
+
